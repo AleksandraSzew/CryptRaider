@@ -15,7 +15,6 @@ class CRYPTRAIDER_API UGrabber : public USceneComponent
 public:	
 	// Sets default values for this component's properties
 	UGrabber();
-	void PrintDemage(const float& Demage);
 
 protected:
 	// Called when the game starts

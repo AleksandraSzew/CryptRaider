@@ -35,17 +35,11 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	FVector End = Start + GetForwardVector() * MaxGrabDistance;
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Cyan);
-	
-	const float Demage = 10;
-	PrintDemage(Demage);
 
-	//References
-	/*float Demage = 10;
-	float& DemageRef = Demage;
-	DemageRef = 5;
-	UE_LOG(LogTemp, Display, TEXT("Demage: %f DemageRef: %f"), Demage, DemageRef);*/
 
-	
+
+
+
 	/*FRotator CurrentRotation = GetComponentRotation();
 	FString RotationString = CurrentRotation.ToCompactString();
 
@@ -58,9 +52,3 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 }
 
-void UGrabber::PrintDemage(const float& Demage)
-{
-	
-	UE_LOG(LogTemp, Display, TEXT("Demage: %f "), Demage); 
-
-}
