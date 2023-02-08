@@ -4,6 +4,7 @@
 #include "Grabber.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h" 
 
 // Sets default values for this component's properties
 UGrabber::UGrabber()
@@ -21,8 +22,17 @@ void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
-	
+	UPhysicsHandleComponent* PhysicsHandler = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+
+	if (PhysicsHandler != nullptr)
+	{
+		PhysicsHandler->GetName();
+		UE_LOG(LogTemp, Display, TEXT("Got PhysicsHandler: %s"), *PhysicsHandler->GetName());
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No PhysicsHandler"));
+	}
 }
 
 
