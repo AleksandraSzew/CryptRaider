@@ -31,6 +31,31 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	
+
+
+	/*FRotator CurrentRotation = GetComponentRotation();
+	FString RotationString = CurrentRotation.ToCompactString();
+
+	UE_LOG(LogTemp, Display, TEXT("Rotation is ticking: %s"), *RotationString);
+
+	UWorld* World = GetWorld();
+	float WorldTime = World->TimeSeconds;
+	UE_LOG(LogTemp, Display, TEXT("World time: %f"), WorldTime);
+	*/
+
+}
+
+
+void UGrabber::Release()
+{
+	UE_LOG(LogTemp, Display, TEXT("Release"));
+}
+
+void UGrabber::Grab()
+{
+
+	
 	FVector Start = GetComponentLocation();
 	FVector End = Start + GetForwardVector() * MaxGrabDistance;
 
@@ -50,25 +75,9 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	if (HasHit)
 	{
 		AActor* Test = HitResult.GetActor();
-		
+
 		UE_LOG(LogTemp, Display, TEXT("Hit name: %s"), *Test->GetActorNameOrLabel());
 	}
-	else
-	{
-		UE_LOG(LogTemp, Display, TEXT("No actor hit"));
-	}
-
-
-
-	/*FRotator CurrentRotation = GetComponentRotation();
-	FString RotationString = CurrentRotation.ToCompactString();
-
-	UE_LOG(LogTemp, Display, TEXT("Rotation is ticking: %s"), *RotationString);
-
-	UWorld* World = GetWorld();
-	float WorldTime = World->TimeSeconds;
-	UE_LOG(LogTemp, Display, TEXT("World time: %f"), WorldTime);
-	*/
-
 }
+
 
