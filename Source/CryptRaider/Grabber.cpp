@@ -6,6 +6,7 @@
 #include "DrawDebugHelpers.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h" 
 
+
 // Sets default values for this component's properties
 UGrabber::UGrabber()
 {
@@ -70,8 +71,10 @@ void UGrabber::Grab()
 	FVector End = Start + GetForwardVector() * MaxGrabDistance;
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Cyan);
+	
 
 	FHitResult HitResult;
+	
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
 	bool HasHit = GetWorld()->SweepSingleByChannel(
 		HitResult,
@@ -84,8 +87,9 @@ void UGrabber::Grab()
 
 	if (HasHit)
 	{
+		DrawDebugSphere(GetWorld(), HitResult.Location, 10, 10, FColor::Green, false, 3);
+		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10, 10, FColor::Red, false, 3);
 		AActor* Test = HitResult.GetActor();
-
 		UE_LOG(LogTemp, Display, TEXT("Hit name: %s"), *Test->GetActorNameOrLabel());
 	}
 }
