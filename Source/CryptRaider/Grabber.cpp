@@ -37,10 +37,13 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		return;
 	}
 
-	FVector TargetLocation = GetComponentLocation() + GetForwardVector() * HoldDistance;
-	PhysicsHandler->SetTargetLocationAndRotation(TargetLocation, GetComponentRotation());
+	
 
-
+	if (PhysicsHandler->GetGrabbedComponent() != nullptr)
+	{
+		FVector TargetLocation = GetComponentLocation() + GetForwardVector() * HoldDistance;
+		PhysicsHandler->SetTargetLocationAndRotation(TargetLocation, GetComponentRotation());
+	}
 	/*FRotator CurrentRotation = GetComponentRotation();
 	FString RotationString = CurrentRotation.ToCompactString();
 
@@ -55,11 +58,29 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 void UGrabber::Release()
 {
-	UE_LOG(LogTemp, Display, TEXT("Release"));
+	
+		UPhysicsHandleComponent* PhysicsHandler = getHandleComponent();
+
+		if (PhysicsHandler == nullptr)
+		{
+			return;
+		}
+
+		FHitResult HitResult;
+		if (PhysicsHandler->GetGrabbedComponent() != nullptr) 
+		{
+			PhysicsHandler->ReleaseComponent();
+		}
+		else
+		{
+			return;
+		}
+
 }
 
 void UGrabber::Grab()
 {
+	
 	UPhysicsHandleComponent* PhysicsHandler = getHandleComponent();
 	if (PhysicsHandler == nullptr)
 	{
@@ -85,11 +106,16 @@ void UGrabber::Grab()
 	);
 
 	if (HasHit)
-	{
+		{	
+		//waking up all bodies
+		UPrimitiveComponent* HitComponent = HitResult.GetComponent();
+		HitComponent->WakeAllRigidBodies();
+
 		DrawDebugSphere(GetWorld(), HitResult.Location, 10, 10, FColor::Green, false, 3);
 		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10, 10, FColor::Red, false, 3);
+
 		PhysicsHandler->GrabComponentAtLocationWithRotation(
-			HitResult.GetComponent(),
+			HitComponent,
 			NAME_None,
 			HitResult.ImpactPoint,
 			GetComponentRotation()
