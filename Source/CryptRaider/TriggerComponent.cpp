@@ -15,11 +15,20 @@ UTriggerComponent::UTriggerComponent()
 void UTriggerComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Display, TEXT("Trigger activated"));
+
 }
 void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	TArray<AActor*> Actors;
+	GetOverlappingActors(Actors);
+
+	if (Actors.Num() > 0)
+	{
+		FString ActorName = Actors[0]->GetActorNameOrLabel();
+		UE_LOG(LogTemp, Display, TEXT("Overlapping actor: %s"), *ActorName);
+
+	}
 
 }
