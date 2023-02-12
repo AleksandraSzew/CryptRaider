@@ -26,8 +26,11 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	if (Actors.Num() > 0)
 	{
-		FString ActorName = Actors[0]->GetActorNameOrLabel();
-		UE_LOG(LogTemp, Display, TEXT("Overlapping actor: %s"), *ActorName);
+		for (int i = 0; i<= Actors.Num()-1; i++)
+		{
+			FString ActorName = Actors[i]->GetActorNameOrLabel();
+			UE_LOG(LogTemp, Display, TEXT("Overlapping actor: %s"), *ActorName);
+		}
 
 	}
 
