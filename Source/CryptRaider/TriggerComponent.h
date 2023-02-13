@@ -26,6 +26,7 @@ public:
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction);
 
 private:
+	AActor* GetAceptableActor() const;
 
 	UPROPERTY(EditAnywhere)
 		FName TriggerTag;

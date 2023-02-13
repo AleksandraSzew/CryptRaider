@@ -20,21 +20,31 @@ void UTriggerComponent::BeginPlay()
 void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	AActor* Actor = GetAceptableActor();
+	if (Actor != nullptr)
+	{
+		//UE_LOG(LogTemp, Display, TEXT("Actor: %s"), *Actor ->GetName());
+	}
+	else
+	{
+		//locing
+	}
+}
+
+AActor* UTriggerComponent::GetAceptableActor() const
+{
 
 	TArray<AActor*> Actors;
 	GetOverlappingActors(Actors);
-	
-	
-		for (AActor* Actor : Actors)
+
+
+	for (AActor* Actor : Actors)
+	{
+		if (Actor->ActorHasTag(TriggerTag))
 		{
-			if (Actor->ActorHasTag(TriggerTag))
-			{
-				
-				UE_LOG(LogTemp, Display, TEXT("Unlocing"));
-
-			}
-			
+		return Actor;
 		}
+	}
 
-
+	return nullptr;
 }
