@@ -25,4 +25,8 @@ public:
 	// Called every frame
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction);
 
+private:
+
+	UPROPERTY(EditAnywhere)
+		FName TriggerTag;
 };
