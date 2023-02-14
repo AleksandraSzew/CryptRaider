@@ -21,10 +21,10 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	AActor* Actor = GetAceptableActor();
-	if (Actor != nullptr)
+	if (Actor)
 	{
 		UPrimitiveComponent* Component = Cast<UPrimitiveComponent>(Actor->GetRootComponent());
-		if (Component != nullptr) 
+		if (Component) 
 		{
 			Component->SetSimulatePhysics(false);
 
@@ -47,7 +47,9 @@ AActor* UTriggerComponent::GetAceptableActor() const
 
 	for (AActor* Actor : Actors)
 	{
-		if (Actor->ActorHasTag(TriggerTag))
+		bool HasTriggerTag = Actor->ActorHasTag(TriggerTag);
+		bool IsGrabbed = Actor->ActorHasTag("Grabbed");
+		if (HasTriggerTag && !IsGrabbed)
 		{
 		return Actor;
 		}
