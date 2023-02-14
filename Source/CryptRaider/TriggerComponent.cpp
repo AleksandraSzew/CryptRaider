@@ -23,11 +23,11 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	AActor* Actor = GetAceptableActor();
 	if (Actor != nullptr)
 	{
-		//UE_LOG(LogTemp, Display, TEXT("Actor: %s"), *Actor ->GetName());
+		//Mover->SetShouldMove(true);
 	}
 	else
 	{
-		//locing
+		//Mover->SetShouldMove(false);
 	}
 }
 
@@ -48,3 +48,8 @@ AActor* UTriggerComponent::GetAceptableActor() const
 
 	return nullptr;
 }
+void UTriggerComponent::SetMover(UMover* NewMover)
+{
+	Mover = NewMover;
+}
+
