@@ -4,9 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
-#include "Mover.h"
 #include "TriggerComponent.generated.h"
-
 
 /**
  * 
@@ -27,13 +25,4 @@ public:
 	// Called every frame
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction);
 
-	UFUNCTION(BlueprintCallable)
-		void SetMover(UMover* NewMover);
-
-private:
-	AActor* GetAceptableActor() const;
-	UMover* Mover;
-
-	UPROPERTY(EditAnywhere)
-		FName TriggerTag;
 };
