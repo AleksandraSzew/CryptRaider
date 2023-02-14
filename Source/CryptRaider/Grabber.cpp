@@ -66,9 +66,10 @@ void UGrabber::Release()
 			return;
 		}
 
-		FHitResult HitResult;
 		if (PhysicsHandler->GetGrabbedComponent() != nullptr) 
 		{
+			AActor* GrabbedActor = PhysicsHandler->GetGrabbedComponent()->GetOwner();
+			GrabbedActor->Tags.Remove("Grabbed");
 			PhysicsHandler->ReleaseComponent();
 		}
 		else
@@ -114,6 +115,7 @@ void UGrabber::Grab()
 		//waking up all bodies
 		UPrimitiveComponent* HitComponent = HitResult.GetComponent();
 		HitComponent->WakeAllRigidBodies();
+		HitResult.GetActor()->Tags.Add("Grabbed");
 
 		DrawDebugSphere(GetWorld(), HitResult.Location, 10, 10, FColor::Green, false, 3);
 		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10, 10, FColor::Red, false, 3);
