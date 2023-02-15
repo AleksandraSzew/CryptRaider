@@ -39,6 +39,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		float HoldDistance = 200;
+	UPROPERTY(EditAnywhere)
+		bool ToggleDebug = false;
 
 	UPhysicsHandleComponent* getHandleComponent() const;
 	bool GetGrabbableInReach(FHitResult& OutHitResult) const;

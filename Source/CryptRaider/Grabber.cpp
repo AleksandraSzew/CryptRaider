@@ -72,8 +72,12 @@ bool UGrabber::GetGrabbableInReach(FHitResult& OutHitResult) const
 	FVector Start = GetComponentLocation();
 	FVector End = Start + GetForwardVector() * MaxGrabDistance;
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Cyan);
-	DrawDebugSphere(GetWorld(), End, 10, 10, FColor::Blue, false, 3);
+	if (ToggleDebug == true)
+	{
+		DrawDebugLine(GetWorld(), Start, End, FColor::Cyan);
+		DrawDebugSphere(GetWorld(), End, 10, 10, FColor::Blue, false, 3);
+	}
+	
 	
 
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
@@ -103,12 +107,17 @@ void UGrabber::Grab()
 		{	
 		//waking up all bodies
 		UPrimitiveComponent* HitComponent = HitResult.GetComponent();
+		HitComponent->SetSimulatePhysics(true);
 		HitComponent->WakeAllRigidBodies();
-		HitResult.GetActor()->Tags.Add("Grabbed");
-
-		DrawDebugSphere(GetWorld(), HitResult.Location, 10, 10, FColor::Green, false, 3);
-		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10, 10, FColor::Red, false, 3);
-
+		AActor* HitActor = HitResult.GetActor();
+		HitActor->Tags.Add("Grabbed");
+		HitActor->DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
+		if (ToggleDebug == true)
+		{
+			DrawDebugSphere(GetWorld(), HitResult.Location, 10, 10, FColor::Green, false, 3);
+			DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10, 10, FColor::Red, false, 3);
+		}
+		
 		PhysicsHandler->GrabComponentAtLocationWithRotation(
 			HitComponent,
 			NAME_None,
