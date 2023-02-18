@@ -47,9 +47,9 @@ AActor* UTriggerComponent::GetAceptableActor() const
 
 	for (AActor* Actor : Actors)
 	{
-		bool HasTriggerTag = Actor->ActorHasTag(TriggerTag);
-		bool IsGrabbed = Actor->ActorHasTag("Grabbed");
-		if (HasTriggerTag && !IsGrabbed)
+		bool bHasTriggerTag = Actor->ActorHasTag(TriggerTag);
+		bool bIsGrabbed = Actor->ActorHasTag("Grabbed");
+		if (bHasTriggerTag && !bIsGrabbed)
 		{
 		return Actor;
 		}

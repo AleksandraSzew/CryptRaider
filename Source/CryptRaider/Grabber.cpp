@@ -104,7 +104,7 @@ void UGrabber::Grab()
 	bool HasHit = GetGrabbableInReach(HitResult);
 
 	if (HasHit)
-		{	
+	{	
 		//waking up all bodies
 		UPrimitiveComponent* HitComponent = HitResult.GetComponent();
 		HitComponent->SetSimulatePhysics(true);

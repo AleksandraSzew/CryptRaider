@@ -19,31 +19,19 @@ UMover::UMover()
 void UMover::BeginPlay()
 {
 	Super::BeginPlay();
-
 	OriginalLocation = GetOwner()->GetActorLocation();
-	
+
 }
 
 
-// Called every frame
 void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-
-	//pointers
-	// 
-	//AActor* Owner = GetOwner();
-	//FString Name = Owner->GetActorNameOrLabel();
-	//FVector Location = Owner->GetActorLocation();
-	//FString LocationString = Location.ToCompactString();
-	//UE_LOG(LogTemp, Display, TEXT("Mover is ticking: %s"), *LocationString);
-	//UE_LOG(LogTemp, Display, TEXT("Mover is ticking: %s"), *Name);
-	//UE_LOG(LogTemp, Display, TEXT("Mover is ticking: %u"), Owner);
-
 	//moving wall
 	FVector TargetLocation = OriginalLocation;
-	if (MoveUp == true) {
+	if (MoveUp == true) 
+	{
 		TargetLocation = OriginalLocation + MoveOffset;
 	}
 	

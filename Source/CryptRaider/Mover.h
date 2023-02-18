@@ -27,10 +27,10 @@ public:
 	void SetShouldMove(bool NewShouldMove);
 private:
 	UPROPERTY(EditAnywhere)
-		FVector MoveOffset;
+	FVector MoveOffset;
 
 	UPROPERTY(EditAnywhere)
-		float MoveTime = 4;
+	float MoveTime = 4;
 
 	bool MoveUp = false;
 	FVector OriginalLocation;

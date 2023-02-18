@@ -8,9 +8,6 @@
 #include "TriggerComponent.generated.h"
 
 
-/**
- * 
- */
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class CRYPTRAIDER_API UTriggerComponent : public UBoxComponent
 {
@@ -28,12 +25,12 @@ public:
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction);
 
 	UFUNCTION(BlueprintCallable)
-		void SetMover(UMover* NewMover);
+	void SetMover(UMover* NewMover);
 
 private:
 	AActor* GetAceptableActor() const;
 	UMover* Mover;
 
 	UPROPERTY(EditAnywhere)
-		FName TriggerTag;
+	FName TriggerTag;
 };
